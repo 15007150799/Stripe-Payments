@@ -1,5 +1,5 @@
 # stripe-payments
-
+A crash course on how to use Stripe elements with Vue js for checkout payments
 ## Project setup
 ```
 npm install

@@ -8,7 +8,7 @@
 
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 var stripe = Stripe(
   "pk_test_51HFvoCHbtH7bHxO6lwaNijl1HqHuepBSgiJBz9A59oersTedqno7NNMcLMsGyOsE5sfhOmuJRCLIGrjwqf2QZc9D006x7D4NGF"
@@ -18,32 +18,36 @@ export default {
   name: "Checkout",
   data() {
     return {
-        session: ''
+      session: ""
     };
   },
   methods: {
-    pay() {      
-      stripe
-        .redirectToCheckout({
-          // Make the id field from the Checkout Session creation API response
-          // available to this file, so you can provide it as argument here
-          // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
-          sessionId: this.session.id
+    pay() {
+      let data = { type: "Conference", amount: 500, currency: "inr" };
+      axios
+        .get(
+          "https://us-central1-stripe-learning.cloudfunctions.net/checkoutSession",
+          {
+            params: {
+              products: data
+            }
+          }
+        )
+        .then(response => {
+          this.session = response.data;
+          console.log(this.session);
+          stripe
+            .redirectToCheckout({
+              sessionId: this.session.id
+            })
+            .then(function(result) {
+              console.log(result);
+            });
         })
-        .then(function(result) {
-            console.log(result);
-          // If `redirectToCheckout` fails due to a browser or network
-          // error, display the localized error message to your customer
-          // using `result.error.message`.
+        .catch(error => {
+          console.log(error);
         });
     }
-  },
-  created() {
-      axios.post('https://us-central1-stripe-learning.cloudfunctions.net/checkoutSession').then(response => {
-          this.session = response.data;
-      }).catch(error => {
-          console.log(error);
-      });
   }
 };
 </script>
