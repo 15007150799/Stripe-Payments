@@ -19,8 +19,8 @@ exports.checkoutSession = functions.https.onRequest((request, response) => {
     ];
     stripe.checkout.sessions.create(
       {
-        success_url: "https://example.com/success",
-        cancel_url: "https://example.com/cancel",
+        success_url: "http://localhost:8080/success",
+        cancel_url: "http://localhost:8080/failure",
         payment_method_types: ["card"],
         line_items: finalData,
       },

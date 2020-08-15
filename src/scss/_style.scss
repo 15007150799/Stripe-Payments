@@ -1,0 +1,21 @@
+.checkout {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .btn {
+    background: #1c8d76;
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+  }
+  .btn:hover {
+    background: darken(#1c8d76, 5%);
+  }
+  .btn:active {
+    transform: scale(0.9);
+  }
+}

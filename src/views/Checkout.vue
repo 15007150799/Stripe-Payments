@@ -26,7 +26,7 @@ export default {
       let data = { type: "Conference", amount: 500, currency: "inr" };
       axios
         .get(
-          "https://us-central1-stripe-learning.cloudfunctions.net/checkoutSession",
+          "http://localhost:5000/stripe-learning/us-central1/checkoutSession",
           {
             params: {
               products: data
@@ -52,27 +52,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.checkout {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .btn {
-    background: #1c8d76;
-    color: white;
-    padding: 1rem 3rem;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s ease-in;
-  }
-  .btn:hover {
-    background: darken(#1c8d76, 5%);
-  }
-  .btn:active {
-    transform: scale(0.9);
-  }
-}
+<style lang="scss">
+@import "../scss/style";
 </style>
-
